@@ -1,11 +1,10 @@
 import React from 'react';
-import Header from './components/organisms/Header';
-import SidebarNotes from './components/molecules/SidebarNotes';
+import Notepad from './components/pages/Notepad';
+
 function App() {
 	return (
 		<div className='App'>
-			<Header />
-			<SidebarNotes></SidebarNotes>
+			<Notepad />
 		</div>
 	);
 }

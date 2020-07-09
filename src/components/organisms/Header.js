@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Icon, Button } from 'semantic-ui-react';
 import Heading from '../atoms/Heading';
 import SearchNotes from '../atoms/SearchNotes';
+import { connect } from 'react-redux';
 
 const ButtonStyle = styled(Button)`
 	margin: 15px !important;
@@ -24,14 +25,10 @@ const Header = props => {
 			<Heading color='teal' fontsize='15px'>
 				Hari's Notepad
 			</Heading>
-			<ButtonStyle
-				width='100px'
-				height='50px'
-				onClick={() => console.log('Hi')}
-			>
+			<ButtonStyle width='100px' height='50px' onClick={props.onCreateNote}>
 				<IconStyle name='edit outline' size='big' color='teal' />
 			</ButtonStyle>
-			<ButtonStyle width='60px' height='40px' onClick={() => console.log('Hi')}>
+			<ButtonStyle width='60px' height='40px' onClick={props.onDeleteNote}>
 				<IconStyle name='trash alternate' size='big' color='teal' />
 			</ButtonStyle>
 			<SearchNotes></SearchNotes>
@@ -39,4 +36,11 @@ const Header = props => {
 	);
 };
 
-export default Header;
+const mapDispatchToProps = dispatch => {
+	return {
+		onCreateNote: () => dispatch({ type: 'CREATE_NOTE' }),
+		onDeleteNote: () => dispatch({ type: 'DELETE_NOTE' }),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Header);

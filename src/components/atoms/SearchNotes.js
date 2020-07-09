@@ -14,7 +14,7 @@ const SearchStyle = styled(Search)`
 		border-color: teal !important;
 	}
 	input {
-		width: 400px;
+		width: 300px;
 	}
 `;
 
