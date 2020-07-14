@@ -57,10 +57,14 @@ const SidebarNotes = props => {
 					vertical
 					visible='true'
 				>
-					{props.notes.map(note => (
-						<Menu.Item as='a' key={note.id}>
-							<p>{note.id}</p>
-							<p>{note.value.slice(0, 5)}</p>
+					{props?.notes.map(note => (
+						<Menu.Item
+							as='a'
+							key={note?.id}
+							onClick={() => props.setCurrentNote(note.id)}
+						>
+							<p>{note?.id}</p>
+							<p>{note?.value.slice(0, 5)}</p>
 						</Menu.Item>
 					))}
 				</SidebarMenuItem>
@@ -71,7 +75,9 @@ const SidebarNotes = props => {
 						<TextArea
 							rows={20}
 							cols={100}
-							placeholder='Start writing your note...'
+							placeholder={
+								props?.notes.length ? 'Start writing your note...' : ''
+							}
 							onChange={handleChange}
 						/>
 					</Form>
@@ -81,10 +87,16 @@ const SidebarNotes = props => {
 	);
 };
 
+const mapDispatchToProps = dispatch => {
+	return {
+		setCurrentNote: id => dispatch({ type: 'CURRENT_NOTE', currentNoteId: id }),
+	};
+};
+
 const mapStateToProps = state => {
 	return {
 		notes: state.notes,
 	};
 };
 
-export default connect(mapStateToProps)(SidebarNotes);
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarNotes);
