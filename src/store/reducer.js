@@ -16,8 +16,25 @@ const reducer = (state = initialState, action) => {
 
 			return {
 				...state,
-				notes: [...state.notes, { id: id, value: '' }],
+				notes: [...state.notes, { id: id, value: '', date: new Date() }],
 				currentNote: id,
+			};
+		case 'NOTE_TEXT':
+			console.log({
+				...state,
+				notes: state.notes.map(note =>
+					note.id === state.currentNote
+						? { ...note, value: action.noteText }
+						: note,
+				),
+			});
+			return {
+				...state,
+				notes: state.notes.map(note =>
+					note.id === state.currentNote
+						? { ...note, value: action.noteText }
+						: note,
+				),
 			};
 		case 'CURRENT_NOTE':
 			console.log(action.currentNoteId);

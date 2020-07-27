@@ -40,10 +40,8 @@ const SidebarMenuItem = styled(Sidebar)`
 `;
 
 const SidebarNotes = props => {
-	const [noteText, setnoteText] = useState('');
-
 	const handleChange = event => {
-		setnoteText(event.target.value);
+		props.setNoteText(event.target.value);
 		console.log(event.target.value);
 	};
 
@@ -64,6 +62,7 @@ const SidebarNotes = props => {
 							onClick={() => props.setCurrentNote(note.id)}
 						>
 							<p>{note?.id}</p>
+							{console.log(note?.value)}
 							<p>{note?.value.slice(0, 5)}</p>
 						</Menu.Item>
 					))}
@@ -90,6 +89,7 @@ const SidebarNotes = props => {
 const mapDispatchToProps = dispatch => {
 	return {
 		setCurrentNote: id => dispatch({ type: 'CURRENT_NOTE', currentNoteId: id }),
+		setNoteText: note => dispatch({ type: 'NOTE_TEXT', noteText: note }),
 	};
 };
 
