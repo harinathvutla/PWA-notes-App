@@ -78,6 +78,10 @@ const SidebarNotes = props => {
 								props?.notes.length ? 'Start writing your note...' : ''
 							}
 							onChange={handleChange}
+							value={
+								props?.notes?.filter(note => note.id === props.currentNote)[0]
+									?.value
+							}
 						/>
 					</Form>
 				</Segment>
@@ -96,6 +100,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
 	return {
 		notes: state.notes,
+		currentNote: state.currentNote,
 	};
 };
 
