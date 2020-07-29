@@ -35,7 +35,12 @@ const SidebarMenuItem = styled(Sidebar)`
 	width: 100% !important;
 	height: 100% !important;
 	a {
-		border-bottom: 1px solid teal;
+		border-bottom: 1px solid teal !important;
+	}
+	a:hover,
+	a:active,
+	a:focus {
+		background-color: rgba(0, 168, 168, 0.25) !important;
 	}
 `;
 
@@ -55,17 +60,25 @@ const SidebarNotes = props => {
 					vertical
 					visible='true'
 				>
-					{props?.notes.map(note => (
-						<Menu.Item
-							as='a'
-							key={note?.id}
-							onClick={() => props.setCurrentNote(note.id)}
-						>
-							<p>{note?.id}</p>
-							{console.log(note?.value)}
-							<p>{note?.value.slice(0, 5)}</p>
-						</Menu.Item>
-					))}
+					{props?.notes.map(note => {
+						let selected =
+							note?.id === props?.currentNote
+								? 'rgba(0, 168, 168, 0.25)'
+								: 'white';
+						console.log(selected);
+						return (
+							<Menu.Item
+								as='a'
+								key={note?.id}
+								onClick={() => props?.setCurrentNote(note.id)}
+								style={{ backgroundColor: selected }}
+							>
+								<p>{note?.id}</p>
+								{console.log(note?.value)}
+								<p>{note?.value.slice(0, 5)}</p>
+							</Menu.Item>
+						);
+					})}
 				</SidebarMenuItem>
 			</SidebarMenu>
 			<SidebarPusher>
