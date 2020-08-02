@@ -41,7 +41,10 @@ const reducer = (state = initialState, action) => {
 			return { ...state, currentNote: action.currentNoteId };
 		case 'DELETE_NOTE':
 			console.log('delete note');
-			return {};
+			return {
+				...state,
+				notes: state.notes.filter(note => note.id !== state.currentNote),
+			};
 		default:
 			return state;
 	}
