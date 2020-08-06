@@ -1,6 +1,7 @@
 import React from 'react';
 import { Search } from 'semantic-ui-react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const SearchStyle = styled(Search)`
 	margin: 15px !important;
@@ -19,18 +20,39 @@ const SearchStyle = styled(Search)`
 `;
 
 const SearchNotes = props => {
+	let timerId;
+	const debounce = (debFunc, val, time) => {
+		timerId = setTimeout(() => {
+			debFunc(val);
+		}, time);
+	};
+
+	const handleSearchChange = (e, { value }) => {
+		clearTimeout(timerId);
+		debounce(props?.setSearchValue, value, 3000);
+	};
+
 	return (
 		<SearchStyle
-			/* 			loading={isLoading}
-			onResultSelect={this.handleResultSelect}
-			onSearchChange={_.debounce(this.handleSearchChange, 500, {
-				leading: true,
-			})}
-			results={results}
-			value={value} */
+			loading={props?.isLoading}
+			onSearchChange={handleSearchChange}
 			size='big'
 		/>
 	);
 };
 
-export default SearchNotes;
+const mapDispatchToProps = dispatch => {
+	return {
+		setLoading: () => dispatch({ type: 'SET_LOADING' }),
+		resetLoading: () => dispatch({ type: 'RESET_LOADING' }),
+		setSearchValue: value => dispatch({ type: 'SEARCH', value: value }),
+	};
+};
+
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchNotes);

@@ -45,6 +45,10 @@ const reducer = (state = initialState, action) => {
 				...state,
 				notes: state.notes.filter(note => note.id !== state.currentNote),
 			};
+
+		case 'SEARCH':
+			console.log('search reducer', action.value);
+			break;
 		default:
 			return state;
 	}

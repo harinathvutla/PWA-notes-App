@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from '../organisms/Header';
-import SidebarExampleSidebar from '../molecules/SidebarExampleSidebar';
+import SidebarNotes from '../molecules/SidebarNotes';
 const Notepad = () => {
 	return (
 		<>
 			<Header />
-			<SidebarExampleSidebar></SidebarExampleSidebar>
+			<SidebarNotes></SidebarNotes>
 		</>
 	);
 };

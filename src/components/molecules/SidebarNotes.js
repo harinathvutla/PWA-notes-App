@@ -1,47 +1,6 @@
 import React from 'react';
-import {
-	Menu,
-	Segment,
-	Sidebar,
-	Form,
-	TextArea,
-	Grid,
-} from 'semantic-ui-react';
-import styled from 'styled-components';
+import { Menu, Segment, Sidebar, Form, TextArea } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-
-const SidebarPushable = styled(Sidebar.Pushable)`
-	display: flex;
-	margin-top: 0px !important;
-	border: 2px teal solid !important;
-	width: 60vw;
-
-	padding: 0px !important;
-`;
-
-const SidebarMenu = styled.div`
-	position: static !important;
-	width: 30%;
-`;
-
-const SidebarPusher = styled(Sidebar.Pusher)`
-	div {
-		padding: 0px !important;
-	}
-`;
-
-const SidebarMenuItem = styled(Sidebar)`
-	width: 100% !important;
-	height: 100% !important;
-	a {
-		border-bottom: 1px solid teal !important;
-	}
-	a:hover,
-	a:active,
-	a:focus {
-		background-color: rgba(0, 168, 168, 0.25) !important;
-	}
-`;
 
 const SidebarNotes = props => {
 	const handleChange = event => {
@@ -50,60 +9,48 @@ const SidebarNotes = props => {
 	};
 
 	return (
-		<Grid columns={1}>
-			<Grid.Column>
-				<SidebarPushable as={Segment}>
-					<SidebarMenu>
-						<SidebarMenuItem
-							as={Menu}
-							animation='overlay'
-							icon='labeled'
-							vertical
-							visible='true'
+		<Sidebar.Pushable as={Segment}>
+			<Sidebar as={Menu} icon='labeled' vertical visible={true} width='thin'>
+				{props?.notes.map(note => {
+					const selected =
+						note?.id === props?.currentNote
+							? 'rgba(0, 168, 168, 0.25)'
+							: 'white';
+					console.log(selected);
+					return (
+						<Menu.Item
+							as='a'
+							key={note?.id}
+							onClick={() => props?.setCurrentNote(note.id)}
+							style={{ backgroundColor: selected }}
 						>
-							{props?.notes.map(note => {
-								const selected =
-									note?.id === props?.currentNote
-										? 'rgba(0, 168, 168, 0.25)'
-										: 'white';
-								console.log(selected);
-								return (
-									<Menu.Item
-										as='a'
-										key={note?.id}
-										onClick={() => props?.setCurrentNote(note.id)}
-										style={{ backgroundColor: selected }}
-									>
-										<p>{note?.id}</p>
-										{console.log(note?.value)}
-										<p>{note?.value.slice(0, 5)}</p>
-									</Menu.Item>
-								);
-							})}
-						</SidebarMenuItem>
-					</SidebarMenu>
-					<SidebarPusher>
-						<Segment basic>
-							<Form>
-								<TextArea
-									rows={20}
-									cols={100}
-									placeholder={
-										props?.notes.length ? 'Start writing your note...' : ''
-									}
-									onChange={handleChange}
-									value={
-										props?.notes?.filter(
-											note => note.id === props.currentNote,
-										)[0]?.value
-									}
-								/>
-							</Form>
-						</Segment>
-					</SidebarPusher>
-				</SidebarPushable>
-			</Grid.Column>
-		</Grid>
+							<p>{note?.id}</p>
+							{console.log(note?.value)}
+							<p>{note?.value.slice(0, 5)}</p>
+						</Menu.Item>
+					);
+				})}
+			</Sidebar>
+
+			<Sidebar.Pusher>
+				<Segment basic rows={20}>
+					<Form>
+						<TextArea
+							rows={20}
+							cols={100}
+							placeholder={
+								props?.notes.length ? 'Start writing your note...' : ''
+							}
+							onChange={handleChange}
+							value={
+								props?.notes?.filter(note => note.id === props.currentNote)[0]
+									?.value ?? ''
+							}
+						/>
+					</Form>
+				</Segment>
+			</Sidebar.Pusher>
+		</Sidebar.Pushable>
 	);
 };
 
