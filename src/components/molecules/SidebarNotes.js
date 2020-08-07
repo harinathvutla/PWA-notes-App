@@ -8,28 +8,41 @@ const SidebarNotes = props => {
 		console.log(event.target.value);
 	};
 
+	const renderNotes = () => {
+		let notes;
+		if (props?.searchValue === '' || props?.searchValue === undefined) {
+			notes = props?.notes;
+		} else {
+			notes = props?.notes.filter(note =>
+				note.value.includes(props?.searchValue),
+			);
+
+			props.setResultsCount(notes.length);
+		}
+
+		return notes.map(note => {
+			const selected =
+				note?.id === props?.currentNote ? 'rgba(0, 168, 168, 0.25)' : 'white';
+			console.log(selected);
+			return (
+				<Menu.Item
+					as='a'
+					key={note?.id}
+					onClick={() => props?.setCurrentNote(note.id)}
+					style={{ backgroundColor: selected }}
+				>
+					<p>{note?.date}</p>
+					{console.log(note?.date)}
+					<p>{note?.value.slice(0, 10)}</p>
+				</Menu.Item>
+			);
+		});
+	};
+
 	return (
 		<Sidebar.Pushable as={Segment}>
 			<Sidebar as={Menu} icon='labeled' vertical visible={true} width='thin'>
-				{props?.notes.map(note => {
-					const selected =
-						note?.id === props?.currentNote
-							? 'rgba(0, 168, 168, 0.25)'
-							: 'white';
-					console.log(selected);
-					return (
-						<Menu.Item
-							as='a'
-							key={note?.id}
-							onClick={() => props?.setCurrentNote(note.id)}
-							style={{ backgroundColor: selected }}
-						>
-							<p>{note?.id}</p>
-							{console.log(note?.value)}
-							<p>{note?.value.slice(0, 5)}</p>
-						</Menu.Item>
-					);
-				})}
+				{renderNotes()}
 			</Sidebar>
 
 			<Sidebar.Pusher>
@@ -58,6 +71,8 @@ const mapDispatchToProps = dispatch => {
 	return {
 		setCurrentNote: id => dispatch({ type: 'CURRENT_NOTE', currentNoteId: id }),
 		setNoteText: note => dispatch({ type: 'NOTE_TEXT', noteText: note }),
+		setResultsCount: resultsCount =>
+			dispatch({ type: 'RESULTS', resultsCount: resultsCount }),
 	};
 };
 
@@ -65,6 +80,7 @@ const mapStateToProps = state => {
 	return {
 		notes: state.notes,
 		currentNote: state.currentNote,
+		searchValue: state.searchValue,
 	};
 };
 

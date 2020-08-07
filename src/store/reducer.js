@@ -10,13 +10,19 @@ const reducer = (state = initialState, action) => {
 			console.log('create note');
 			console.log({
 				...state,
-				notes: [...state.notes, { id: id, value: '', date: new Date() }],
+				notes: [
+					...state.notes,
+					{ id: id, value: '', date: new Date().toDateString() },
+				],
 				currentNote: id,
 			});
 
 			return {
 				...state,
-				notes: [...state.notes, { id: id, value: '', date: new Date() }],
+				notes: [
+					...state.notes,
+					{ id: id, value: '', date: new Date().toDateString() },
+				],
 				currentNote: id,
 			};
 		case 'NOTE_TEXT':
@@ -48,7 +54,20 @@ const reducer = (state = initialState, action) => {
 
 		case 'SEARCH':
 			console.log('search reducer', action.value);
-			break;
+			return {
+				...state,
+				searchValue: action.value,
+			};
+		case 'RESULTS':
+			return {
+				...state,
+				resultsCount: action.resultsCount,
+			};
+		case 'SET_LOADING':
+			return {
+				...state,
+				isLoading: action.val,
+			};
 		default:
 			return state;
 	}

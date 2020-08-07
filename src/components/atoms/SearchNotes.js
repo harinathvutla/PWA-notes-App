@@ -24,10 +24,12 @@ const SearchNotes = props => {
 	const debounce = (debFunc, val, time) => {
 		timerId = setTimeout(() => {
 			debFunc(val);
+			props.setLoading(false);
 		}, time);
 	};
 
 	const handleSearchChange = (e, { value }) => {
+		props.setLoading(true);
 		clearTimeout(timerId);
 		debounce(props?.setSearchValue, value, 3000);
 	};
@@ -37,14 +39,22 @@ const SearchNotes = props => {
 			loading={props?.isLoading}
 			onSearchChange={handleSearchChange}
 			size='big'
+			results={[
+				{
+					title: props.isLoading
+						? ''
+						: props.resultsCount
+						? props.resultsCount + ' results found'
+						: '0 results found',
+				},
+			]}
 		/>
 	);
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		setLoading: () => dispatch({ type: 'SET_LOADING' }),
-		resetLoading: () => dispatch({ type: 'RESET_LOADING' }),
+		setLoading: val => dispatch({ type: 'SET_LOADING', val: val }),
 		setSearchValue: value => dispatch({ type: 'SEARCH', value: value }),
 	};
 };
@@ -52,6 +62,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
+		resultsCount: state.resultsCount,
 	};
 };
 
