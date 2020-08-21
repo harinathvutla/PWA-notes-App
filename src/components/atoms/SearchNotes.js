@@ -31,7 +31,7 @@ const SearchNotes = props => {
 	const handleSearchChange = (e, { value }) => {
 		props.setLoading(true);
 		clearTimeout(timerId);
-		debounce(props?.setSearchValue, value, 3000);
+		debounce(props?.setSearchValue, value, 500);
 	};
 
 	return (
