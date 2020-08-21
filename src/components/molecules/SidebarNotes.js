@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Segment, Sidebar, Form, TextArea } from 'semantic-ui-react';
+import Markdown from '../molecules/Markdown';
 import { connect } from 'react-redux';
 
 const SidebarNotes = props => {
@@ -46,16 +47,23 @@ const SidebarNotes = props => {
 			</Sidebar>
 
 			<Sidebar.Pusher>
-				<Segment basic rows={20}>
+				<Segment basic>
 					<Form>
 						<TextArea
-							rows={20}
-							cols={100}
+							rows={10}
+							cols={50}
 							placeholder={
 								props?.notes.length ? 'Start writing your note...' : ''
 							}
 							onChange={handleChange}
 							value={
+								props?.notes?.filter(note => note.id === props.currentNote)[0]
+									?.value ?? ''
+							}
+						/>
+
+						<Markdown
+							input={
 								props?.notes?.filter(note => note.id === props.currentNote)[0]
 									?.value ?? ''
 							}
