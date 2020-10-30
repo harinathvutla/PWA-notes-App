@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchStyle = styled(Search)`
 	margin: 15px !important;
@@ -20,31 +20,39 @@ const SearchStyle = styled(Search)`
 `;
 
 const SearchNotes = props => {
+
+	const isLoading = useSelector(state => state.isLoading);
+	const resultsCount = useSelector(state => state.resultsCount);
+	const dispatch = useDispatch();
+
+	const setLoading = val => dispatch({ type: 'SET_LOADING', val: val });
+	const setSearchValue = value => dispatch({ type: 'SEARCH', value: value });
+
 	let timerId;
 	const debounce = (debFunc, val, time) => {
 		timerId = setTimeout(() => {
 			debFunc(val);
-			props.setLoading(false);
+			setLoading(false);
 		}, time);
 	};
 
 	const handleSearchChange = (e, { value }) => {
-		props.setLoading(true);
+		setLoading(true);
 		clearTimeout(timerId);
-		debounce(props?.setSearchValue, value, 500);
+		debounce(setSearchValue, value, 500);
 	};
 
 	return (
 		<SearchStyle
-			loading={props?.isLoading}
+			loading={isLoading}
 			onSearchChange={handleSearchChange}
 			size='big'
 			results={[
 				{
 					title: props.isLoading
 						? ''
-						: props.resultsCount
-						? props.resultsCount + ' results found'
+						: resultsCount
+						? resultsCount + ' results found'
 						: '0 results found',
 				},
 			]}
@@ -52,18 +60,4 @@ const SearchNotes = props => {
 	);
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		setLoading: val => dispatch({ type: 'SET_LOADING', val: val }),
-		setSearchValue: value => dispatch({ type: 'SEARCH', value: value }),
-	};
-};
-
-const mapStateToProps = state => {
-	return {
-		isLoading: state.isLoading,
-		resultsCount: state.resultsCount,
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchNotes);
+export default SearchNotes;

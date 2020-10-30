@@ -1,35 +1,45 @@
 import React from 'react';
 import { Menu, Segment, Sidebar, Form, TextArea } from 'semantic-ui-react';
 import Markdown from '../molecules/Markdown';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const SidebarNotes = props => {
+const SidebarNotes = () => {
+
+	const notes = useSelector(state => state.notes);
+	const currentNote = useSelector(state => state.currentNote);
+	const searchValue = useSelector(state => state.searchValue);
+	const dispatch = useDispatch();
+
+	const setCurrentNote = id => dispatch({ type: 'CURRENT_NOTE', currentNoteId: id });
+	const setNoteText = note => dispatch({ type: 'NOTE_TEXT', noteText: note });
+	const setResultsCount = resultsCount => dispatch({ type: 'RESULTS', resultsCount: resultsCount });
+
 	const handleChange = event => {
-		props.setNoteText(event.target.value);
+		setNoteText(event.target.value);
 		console.log(event.target.value);
 	};
 
 	const renderNotes = () => {
-		let notes;
-		if (props?.searchValue === '' || props?.searchValue === undefined) {
-			notes = props?.notes;
+		let notesLocal;
+		if (searchValue === '' || searchValue === undefined) {
+			notesLocal = notes;
 		} else {
-			notes = props?.notes.filter(note =>
-				note.value.includes(props?.searchValue),
+			notesLocal = notes.filter(note =>
+				note.value.includes(searchValue),
 			);
 
-			props.setResultsCount(notes.length);
+			setResultsCount(notes.length);
 		}
 
-		return notes.map(note => {
+		return notesLocal.map(note => {
 			const selected =
-				note?.id === props?.currentNote ? 'rgba(0, 168, 168, 0.25)' : 'white';
+				note?.id === currentNote ? 'rgba(0, 168, 168, 0.25)' : 'white';
 			console.log(selected);
 			return (
 				<Menu.Item
 					as='a'
 					key={note?.id}
-					onClick={() => props?.setCurrentNote(note.id)}
+					onClick={() => setCurrentNote(note.id)}
 					style={{ backgroundColor: selected }}
 				>
 					<p>{note?.date}</p>
@@ -53,18 +63,18 @@ const SidebarNotes = props => {
 							rows={10}
 							cols={50}
 							placeholder={
-								props?.notes.length ? 'Start writing your note...' : ''
+								notes.length ? 'Start writing your note...' : ''
 							}
 							onChange={handleChange}
 							value={
-								props?.notes?.filter(note => note.id === props.currentNote)[0]
+								notes?.filter(note => note.id === currentNote)[0]
 									?.value ?? ''
 							}
 						/>
 
 						<Markdown
 							input={
-								props?.notes?.filter(note => note.id === props.currentNote)[0]
+								notes?.filter(note => note.id === currentNote)[0]
 									?.value ?? ''
 							}
 						/>
@@ -75,21 +85,4 @@ const SidebarNotes = props => {
 	);
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		setCurrentNote: id => dispatch({ type: 'CURRENT_NOTE', currentNoteId: id }),
-		setNoteText: note => dispatch({ type: 'NOTE_TEXT', noteText: note }),
-		setResultsCount: resultsCount =>
-			dispatch({ type: 'RESULTS', resultsCount: resultsCount }),
-	};
-};
-
-const mapStateToProps = state => {
-	return {
-		notes: state.notes,
-		currentNote: state.currentNote,
-		searchValue: state.searchValue,
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarNotes);
+export default SidebarNotes;
