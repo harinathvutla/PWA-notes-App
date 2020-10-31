@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SidebarNotes = () => {
 
-	const notes = useSelector(state => state.notes);
-	const currentNote = useSelector(state => state.currentNote);
-	const searchValue = useSelector(state => state.searchValue);
+	const notes = useSelector(state => state.notesReducer.notes);
+	const currentNote = useSelector(state => state.notesReducer.currentNote);
+	const searchValue = useSelector(state => state.searchReducer.searchValue);
 	const dispatch = useDispatch();
 
 	const setCurrentNote = id => dispatch({ type: 'CURRENT_NOTE', currentNoteId: id });

@@ -3,7 +3,7 @@ const initialState = {
 	currentNote: '',
 };
 
-const reducer = (state = initialState, action) => {
+const notesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case 'CREATE_NOTE':
 			let id = Date.now();
@@ -51,26 +51,9 @@ const reducer = (state = initialState, action) => {
 				...state,
 				notes: state.notes.filter(note => note.id !== state.currentNote),
 			};
-
-		case 'SEARCH':
-			console.log('search reducer', action.value);
-			return {
-				...state,
-				searchValue: action.value,
-			};
-		case 'RESULTS':
-			return {
-				...state,
-				resultsCount: action.resultsCount,
-			};
-		case 'SET_LOADING':
-			return {
-				...state,
-				isLoading: action.val,
-			};
 		default:
 			return state;
 	}
 };
 
-export default reducer;
+export default notesReducer;

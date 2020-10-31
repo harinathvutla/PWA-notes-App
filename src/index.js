@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from '../src/store/reducer';
+
+import notesReducer from '../src/store/notesReducer';
+import searchReducer from '../src/store/searchReducer';
+
+const rootReducer = combineReducers({notesReducer, searchReducer});
 
 const store = createStore(
-	reducer,
+	rootReducer,
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 

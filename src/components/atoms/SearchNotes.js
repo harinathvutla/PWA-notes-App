@@ -21,8 +21,8 @@ const SearchStyle = styled(Search)`
 
 const SearchNotes = props => {
 
-	const isLoading = useSelector(state => state.isLoading);
-	const resultsCount = useSelector(state => state.resultsCount);
+	const isLoading = useSelector(state => state.searchReducer.isLoading);
+	const resultsCount = useSelector(state => state.searchReducer.resultsCount);
 	const dispatch = useDispatch();
 
 	const setLoading = val => dispatch({ type: 'SET_LOADING', val: val });
