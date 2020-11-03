@@ -1,6 +1,6 @@
 const initialState = {
-	notes: [],
-	currentNote: '',
+	notes: JSON.parse(localStorage.getItem('notes'))??[],
+	currentNote: JSON.parse(localStorage.getItem('currentNote'))??'',
 };
 
 const notesReducer = (state = initialState, action) => {

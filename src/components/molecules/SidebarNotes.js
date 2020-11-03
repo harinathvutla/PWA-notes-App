@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Menu, Segment, Sidebar, Form, TextArea } from 'semantic-ui-react';
 import Markdown from '../molecules/Markdown';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,16 +19,21 @@ const SidebarNotes = () => {
 		console.log(event.target.value);
 	};
 
+	 useEffect(() => {
+		localStorage.setItem('notes',JSON.stringify(notes));
+		localStorage.setItem('currentNote',JSON.stringify(currentNote));
+	}, [notes, currentNote]); 
+
 	const renderNotes = () => {
 		let notesLocal;
 		if (searchValue === '' || searchValue === undefined) {
 			notesLocal = notes;
 		} else {
-			notesLocal = notes.filter(note =>
+			notesLocal = notes?.filter(note =>
 				note.value.includes(searchValue),
 			);
 
-			setResultsCount(notes.length);
+			setResultsCount(notesLocal.length);
 		}
 
 		return notesLocal.map(note => {
