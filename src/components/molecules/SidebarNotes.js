@@ -1,7 +1,19 @@
 import React, {useEffect} from 'react';
-import { Menu, Segment, Sidebar, Form, TextArea } from 'semantic-ui-react';
+import { Menu, Segment, Sidebar, Form, TextArea, Button } from 'semantic-ui-react';
 import Markdown from '../molecules/Markdown';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+
+const ButtonsWrapper = styled.div`
+display: flex;
+justify-content: flex-end;
+.ui.button {
+	background-color: teal;
+	color: white;
+}
+margin-right: 20px;
+margin-top: 20px;
+`;
 
 const SidebarNotes = () => {
 
@@ -56,17 +68,17 @@ const SidebarNotes = () => {
 	};
 
 	return (
-		<Sidebar.Pushable as={Segment}>
-			<Sidebar as={Menu} icon='labeled' vertical visible={true} width='thin'>
+		<Sidebar.Pushable as={Segment} style={{border: "solid 1px teal"}}>
+			<Sidebar as={Menu} icon='labeled' vertical visible={true} width='thin' 
+			style={{border: "0px"}}
+			>
 				{renderNotes()}
 			</Sidebar>
-
 			<Sidebar.Pusher>
 				<Segment basic>
-					<Form>
+					<Form style={{maxWidth: "85%"}}>
 						<TextArea
-							rows={10}
-							cols={50}
+						style= {{height: "80vh", width: "100%"}}
 							placeholder={
 								notes.length ? 'Start writing your note...' : ''
 							}
@@ -76,6 +88,10 @@ const SidebarNotes = () => {
 									?.value ?? ''
 							}
 						/>
+						<ButtonsWrapper>
+							<Button>Edit</Button>
+							<Button>Save</Button>
+						</ButtonsWrapper>
 
 						<Markdown
 							input={
