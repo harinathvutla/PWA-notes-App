@@ -40,24 +40,4 @@ workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/P
 self.addEventListener( 'fetch', e => {
     console.log(`interception ${e.request.method} to ${e.request.url}`);
 })
-
-// Caching the files for offline purpose
-
-self.addEventListener('install', function(event) {
-    event.waitUntil(
-     caches.open('v1').then(function(cache) {
-        return cache.addAll([
-          '/static/css/main.1f170ed0.chunk.css',
-          '/static/js/2.77d9dfa4.chunk.js',
-          '/static/js/main.ec0c4f59.chunk.js',
-          'https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css',
-          'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin',
-          'https://fonts.gstatic.com/s/lato/v17/S6uyw4BMUTPHjx4wXiWtFCc.woff2',
-          'https://fonts.gstatic.com/s/lato/v17/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2',
-          'https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/themes/default/assets/fonts/icons.woff2',
-          'https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/themes/default/assets/fonts/outline-icons.woff2'
-        ])
-     })
-     );
-  });
   
