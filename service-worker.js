@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/PWA-notes-App/precache-manifest.c8f32a3700c1f0222860883deecd901e.js"
+  "/PWA-notes-App/precache-manifest.dc0f895bfc340930670cdae9bc3d7e73.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -37,3 +37,6 @@ workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/P
   
   blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
 });
+self.addEventListener( 'fetch', e => {
+    console.log(`interception ${e.request.method} to ${e.request.url}`);
+})
