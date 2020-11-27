@@ -28,3 +28,28 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
+
+/* function notifyMe() {
+	if (!("Notification" in window)) {
+	  alert("This browser does not support system notifications");
+	}
+	else if (Notification.permission === "granted") {
+		console.log('granted');
+	  notify();
+	}
+	else if (Notification.permission !== 'denied') {
+	  Notification.requestPermission().then(function (permission) {
+		if (permission === "granted") {
+			console.log(permission);
+		  notify();
+		}
+	  });
+	}
+	
+	function notify() {
+	  let notification = new Notification('TITLE OF NOTIFICATION');
+ 
+	}
+  
+  }
+  notifyMe(); */
