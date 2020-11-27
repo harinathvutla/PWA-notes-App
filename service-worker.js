@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/PWA-notes-App/precache-manifest.67fcda07f5a6c998d9b3af8bd1fb8dbd.js"
+  "/PWA-notes-App/precache-manifest.cde99795bd4518daa5563ee70d664d68.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -37,6 +37,34 @@ workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/P
   
   blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
 });
+/* function urlBase64ToUint8Array(base64String) {
+	const padding = '='.repeat((4 - base64String.length % 4) % 4);
+	const base64 = (base64String + padding)
+	  .replace(/-/g, '+')
+	  .replace(/_/g, '/');
+   
+	const rawData = window.atob(base64);
+	const outputArray = new Uint8Array(rawData.length);
+   
+	for (let i = 0; i < rawData.length; ++i) {
+	  outputArray[i] = rawData.charCodeAt(i);
+	}
+	return outputArray;
+  } 
+
+const vapidPublicKey = "BImYznJgvAQVQkKk_o7xnkEoUmGx8g6kVh7hT8rpt_0oJX7pkVrM1q1QXivTn6JRarWnrYHwT_EHwMLCMd-kUJE";
+const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey); */
+
+self.navigator.serviceWorker.ready.then(registration=> {
+    console.log('registration', registration);
+    return registration.pushManager.getSubscription().then((subscription)=> {
+        return registration.pushManager.subscribe({
+            userVisibleOnly: true,
+         //   applicationServerKey: convertedVapidKey
+        });
+    });
+})
+
 self.addEventListener( 'fetch', e => {
     console.log(`interception ${e.request.method} to ${e.request.url}`);
 });
