@@ -55,7 +55,7 @@ workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/P
 const vapidPublicKey = "BImYznJgvAQVQkKk_o7xnkEoUmGx8g6kVh7hT8rpt_0oJX7pkVrM1q1QXivTn6JRarWnrYHwT_EHwMLCMd-kUJE";
 const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey); */
 
-self.navigator.serviceWorker.ready.then(registration=> {
+navigator.serviceWorker.ready.then(registration=> {
     console.log('registration', registration);
     return registration.pushManager.getSubscription().then((subscription)=> {
         return registration.pushManager.subscribe({
@@ -63,7 +63,8 @@ self.navigator.serviceWorker.ready.then(registration=> {
          //   applicationServerKey: convertedVapidKey
         });
     });
-})
+});
+
 
 self.addEventListener( 'fetch', e => {
     console.log(`interception ${e.request.method} to ${e.request.url}`);
