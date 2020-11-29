@@ -16,7 +16,7 @@
 const vapidPublicKey = "BImYznJgvAQVQkKk_o7xnkEoUmGx8g6kVh7hT8rpt_0oJX7pkVrM1q1QXivTn6JRarWnrYHwT_EHwMLCMd-kUJE";
 const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey); */
 
-if ('serviceWorker' in navigator) {
+/* if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready
     .then(function(registration) {
       console.log('A service worker is active:', registration.active);
@@ -28,15 +28,17 @@ if ('serviceWorker' in navigator) {
     console.log('Service workers are not supported.');
   }
 
-navigator.serviceWorker.ready.then(registration=> {
-    console.log('registration', registration);
-    return registration.pushManager.getSubscription().then((subscription)=> {
-        return registration.pushManager.subscribe({
-            userVisibleOnly: true,
-         //   applicationServerKey: convertedVapidKey
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(registration=> {
+        console.log('registration', registration);
+        return registration.pushManager.getSubscription().then((subscription)=> {
+            return registration.pushManager.subscribe({
+                userVisibleOnly: true,
+             //   applicationServerKey: convertedVapidKey
+            });
         });
     });
-});
+  } */
 
 
 self.addEventListener( 'fetch', e => {

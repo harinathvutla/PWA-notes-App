@@ -91,12 +91,6 @@ function registerValidSW(swUrl, config) {
 						}
 					}
 				};
-
-				registration.pushManager.getSubscription().then((subscription)=> {
-					 registration.pushManager.subscribe({
-						userVisibleOnly: true,
-					});
-				});
 			};
 		})
 		.catch(error => {

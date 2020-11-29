@@ -4,6 +4,7 @@
 	"theme_color": "#008080",
 	"background_color": "#008080",
 	"display": "standalone",
+	"gcm_sender_id": "71562645621",
 	"start_url": "https://harinathvutla.github.io/PWA-notes-App/",
 	"icons": [
 		{
