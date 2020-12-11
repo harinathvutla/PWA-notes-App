@@ -84,7 +84,7 @@ self.addEventListener( 'fetch', e => {
     console.log(`interception ${e.request.method} to ${e.request.url}`);
     console.log('hari');
 	  e.waitUntil(
-		  this.registration.showNotification("hello", {
+		  self.registration.showNotification("hello", {
 			 body: "hello from hari" 
 		  })
 	  )
