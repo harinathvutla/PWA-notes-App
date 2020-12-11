@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/PWA-notes-App/precache-manifest.ab7618eeb36e394fb584affa118de952.js"
+  "/PWA-notes-App/precache-manifest.a9d4b6d9531368701f2716b0fd3ee13e.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -82,11 +82,5 @@ const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey); */
 
 self.addEventListener( 'fetch', e => {
     console.log(`interception ${e.request.method} to ${e.request.url}`);
-    console.log('hari');
-	  e.waitUntil(
-		  self.registration.showNotification("hello", {
-			 body: "hello from hari" 
-		  })
-	  )
 });
   
