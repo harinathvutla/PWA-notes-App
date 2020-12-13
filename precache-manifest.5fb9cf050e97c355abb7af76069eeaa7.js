@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3bb1b9bca693e8b9dfa35152c3ed1b56",
+    "revision": "4928cad08039260c2d99be1d51d6f48f",
     "url": "/PWA-notes-App/index.html"
   },
   {
-    "revision": "57a35444acac16d1ea0b",
+    "revision": "d1cb84bcea2e8b755992",
     "url": "/PWA-notes-App/static/css/main.1f170ed0.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PWA-notes-App/static/js/2.77d9dfa4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "57a35444acac16d1ea0b",
-    "url": "/PWA-notes-App/static/js/main.6b350c0e.chunk.js"
+    "revision": "d1cb84bcea2e8b755992",
+    "url": "/PWA-notes-App/static/js/main.2c195429.chunk.js"
   },
   {
     "revision": "f979e7f938ff82214c53",
