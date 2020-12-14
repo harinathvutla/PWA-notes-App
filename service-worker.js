@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/PWA-notes-App/precache-manifest.4ae860c4278a1cfd7da2f09f85d5c0e8.js"
+  "/PWA-notes-App/precache-manifest.ac4a1cb9158b60404abda8cb59601125.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -84,3 +84,22 @@ self.addEventListener( 'fetch', e => {
     console.log(`interception ${e.request.method} to ${e.request.url}`);
 });
   
+self.addEventListener('notificationclick', function(event) {
+	console.log('On notification click: ', event.notification.tag);
+	console.log('On notification: ', event.notification);
+	event.notification.close();
+  
+	// This looks to see if the current is already open and
+	// focuses if it is
+	event.waitUntil(clients.matchAll({
+	  type: "window"
+	}).then(function(clientList) {
+	  for (var i = 0; i < clientList.length; i++) {
+		var client = clientList[i];
+		if (client.url == '/' && 'focus' in client)
+		  return client.focus();
+	  }
+	  if (clients.openWindow)
+		return clients.openWindow('/');
+	}));
+  });
