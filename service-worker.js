@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/PWA-notes-App/precache-manifest.ac4a1cb9158b60404abda8cb59601125.js"
+  "/PWA-notes-App/precache-manifest.148c70981403ee6c2e720e40e5c37e66.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -88,9 +88,7 @@ self.addEventListener('notificationclick', function(event) {
 	console.log('On notification click: ', event.notification.tag);
 	console.log('On notification: ', event.notification);
 	event.notification.close();
-  
-	// This looks to see if the current is already open and
-	// focuses if it is
+
 	event.waitUntil(clients.matchAll({
 	  type: "window"
 	}).then(function(clientList) {

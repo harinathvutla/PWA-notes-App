@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/PWA-notes-App/static/css/main.1f170ed0.chunk.css",
-    "main.js": "/PWA-notes-App/static/js/main.aded59d7.chunk.js",
-    "main.js.map": "/PWA-notes-App/static/js/main.aded59d7.chunk.js.map",
+    "main.js": "/PWA-notes-App/static/js/main.fefb00dd.chunk.js",
+    "main.js.map": "/PWA-notes-App/static/js/main.fefb00dd.chunk.js.map",
     "runtime-main.js": "/PWA-notes-App/static/js/runtime-main.dd517858.js",
     "runtime-main.js.map": "/PWA-notes-App/static/js/runtime-main.dd517858.js.map",
     "static/js/2.77d9dfa4.chunk.js": "/PWA-notes-App/static/js/2.77d9dfa4.chunk.js",
     "static/js/2.77d9dfa4.chunk.js.map": "/PWA-notes-App/static/js/2.77d9dfa4.chunk.js.map",
     "index.html": "/PWA-notes-App/index.html",
-    "precache-manifest.ac4a1cb9158b60404abda8cb59601125.js": "/PWA-notes-App/precache-manifest.ac4a1cb9158b60404abda8cb59601125.js",
+    "precache-manifest.148c70981403ee6c2e720e40e5c37e66.js": "/PWA-notes-App/precache-manifest.148c70981403ee6c2e720e40e5c37e66.js",
     "service-worker.js": "/PWA-notes-App/service-worker.js",
     "static/css/main.1f170ed0.chunk.css.map": "/PWA-notes-App/static/css/main.1f170ed0.chunk.css.map",
     "static/js/2.77d9dfa4.chunk.js.LICENSE.txt": "/PWA-notes-App/static/js/2.77d9dfa4.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.dd517858.js",
     "static/js/2.77d9dfa4.chunk.js",
     "static/css/main.1f170ed0.chunk.css",
-    "static/js/main.aded59d7.chunk.js"
+    "static/js/main.fefb00dd.chunk.js"
   ]
 }
