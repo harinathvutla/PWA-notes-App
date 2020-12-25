@@ -29,31 +29,6 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
 
-/*  function notifyMe() {
-	if (!("Notification" in window)) {
-	  alert("This browser does not support system notifications");
-	}
-	else if (Notification.permission === "granted") {
-		console.log('granted');
-	  notify();
-	}
-	else if (Notification.permission !== 'denied') {
-	  Notification.requestPermission().then(function (permission) {
-		if (permission === "granted") {
-			console.log(permission);
-		  notify();
-		}
-	  });
-	}
-	
-	function notify() {
-	  let notification = new Notification('TITLE OF NOTIFICATION');
- 
-	}
-  
-  }
-  notifyMe();  */
-
   function urlBase64ToUint8Array(base64String) {
 	const padding = '='.repeat((4 - base64String.length % 4) % 4);
 	const base64 = (base64String + padding)
@@ -70,30 +45,42 @@ serviceWorker.register();
   } 
 
   const vapidPublicKey = "BImYznJgvAQVQkKk_o7xnkEoUmGx8g6kVh7hT8rpt_0oJX7pkVrM1q1QXivTn6JRarWnrYHwT_EHwMLCMd-kUJE";
-const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey); 
+  const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey); 
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready
-    .then(function(registration) {
-      console.log('A service worker is active:', registration.active);
-  
-      // At this point, you can call methods that require an active
-      // service worker, like registration.pushManager.subscribe()
-    });
-  } else {
+    	.then(function(registration) {
+      		console.log('A service worker is active:', registration.active);
+	  		console.log('registration', registration);
+      		// At this point, you can call methods that require an active
+	  		// service worker, like registration.pushManager.subscribe()
+	  		return registration.pushManager.subscribe({
+				userVisibleOnly: true,
+				applicationServerKey: convertedVapidKey
+			});
+    	});
+  	} else {
     console.log('Service workers are not supported.');
   }
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration=> {
 		console.log('registration', registration);
-		return registration.pushManager.subscribe({
-			userVisibleOnly: true,
-			applicationServerKey: convertedVapidKey
-		});
+		console.log('Notification.permission',Notification.permission);
 
-/*         return registration.pushManager.getSubscription().then((subscription)=> {
- 
-        }); */
+			if (Notification.permission == 'granted') {
+				navigator.serviceWorker.getRegistration().then(function(reg) {
+					console.log('reg', reg);
+					return reg.showNotification('Hello!!', {
+						body: 'Welcome to my notes app',
+						icon: 'https://harinathvutla.github.io/PWA-notes-App/logo192.png',
+						vibrate: [100, 50, 100],
+        				data: {
+          						dateOfArrival: Date.now(),
+          						primaryKey: 1
+        					}
+					});
+				});
+			  }
     });
   }

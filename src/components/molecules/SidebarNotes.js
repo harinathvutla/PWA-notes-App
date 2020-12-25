@@ -16,7 +16,7 @@ margin-top: 20px;
 `;
 
 const MarkdownWrapper = styled.div`
-	height: 80vh !important;
+	height: 75vh !important;
 	width: 100% !important;
 	*{
 		margin: 0;
