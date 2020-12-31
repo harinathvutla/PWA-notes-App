@@ -29,7 +29,7 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
 
-  function urlBase64ToUint8Array(base64String) {
+function urlBase64ToUint8Array(base64String) {
 	const padding = '='.repeat((4 - base64String.length % 4) % 4);
 	const base64 = (base64String + padding)
 	  .replace(/-/g, '+')
@@ -42,12 +42,12 @@ serviceWorker.register();
 	  outputArray[i] = rawData.charCodeAt(i);
 	}
 	return outputArray;
-  } 
+} 
 
-  const vapidPublicKey = "BImYznJgvAQVQkKk_o7xnkEoUmGx8g6kVh7hT8rpt_0oJX7pkVrM1q1QXivTn6JRarWnrYHwT_EHwMLCMd-kUJE";
-  const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey); 
+const vapidPublicKey = "BImYznJgvAQVQkKk_o7xnkEoUmGx8g6kVh7hT8rpt_0oJX7pkVrM1q1QXivTn6JRarWnrYHwT_EHwMLCMd-kUJE";
+const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);  
 
-  if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready
     	.then(function(registration) {
       		console.log('A service worker is active:', registration.active);
@@ -61,14 +61,14 @@ serviceWorker.register();
     	});
   	} else {
     console.log('Service workers are not supported.');
-  }
+}
 
-  if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration=> {
 		console.log('registration', registration);
 		console.log('Notification.permission',Notification.permission);
 
-			if (Notification.permission == 'granted') {
+			if (Notification.permission === 'granted') {
 				navigator.serviceWorker.getRegistration().then(function(reg) {
 					console.log('reg', reg);
 					return reg.showNotification('Hello!!', {
@@ -83,4 +83,4 @@ serviceWorker.register();
 				});
 			  }
     });
-  }
+}
