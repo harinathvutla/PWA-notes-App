@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/PWA-notes-App/precache-manifest.181a1954183a53d503397253bcee181a.js"
+  "/PWA-notes-App/precache-manifest.b97ca53a236f8a8821da987b111b30f0.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -38,6 +38,9 @@ workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/P
   blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
 });
 
+importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js');
+
 self.addEventListener( 'fetch', e => {
     console.log(`interception ${e.request.method} to ${e.request.url}`);
 });
@@ -59,3 +62,7 @@ self.addEventListener('notificationclick', function(event) {
 		return clients.openWindow('/');
 	}));
   });
+
+
+  firebase.initializeApp({messagingSenderId: "631743565104"});
+  const initMessaging = firebase.messaging();
