@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/PWA-notes-App/precache-manifest.b97ca53a236f8a8821da987b111b30f0.js"
+  "/PWA-notes-App/precache-manifest.9d9c86c48e412f4ab9bd13e009019c09.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -62,7 +62,3 @@ self.addEventListener('notificationclick', function(event) {
 		return clients.openWindow('/');
 	}));
   });
-
-
-  firebase.initializeApp({messagingSenderId: "631743565104"});
-  const initMessaging = firebase.messaging();
